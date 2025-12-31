@@ -116,6 +116,8 @@
                         <span>{{ $item['tarif_tindakan'] }} (x{{ $item['jumlah'] }})</span>
                         <span>Rp {{ number_format($item['total'], 0, ',', '.') }}</span>
                     </li>
+                    <p class="ml-3">Gigi: {{ $item['nomer_gigi'] ?? '-' }}</p>
+
                 @empty
                     <li><span>- Belum ada Data.</span></li>
                 @endforelse

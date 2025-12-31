@@ -45,6 +45,9 @@
                         <p class="font-medium text-gray-700">{{ $item['tarif_tindakan'] }}</p>
                         <p class="text-sm text-gray-500">Rp {{ number_format($item['nilai_tarif'], 0, ',', '.') }} x
                             {{ $item['jumlah'] }}</p>
+                        <div class="text-sky-700">
+                            Gigi: {{ $item['nomer_gigi'] ?? '-' }}
+                        </div>
                     </div>
 
                     <h3>Rp {{ number_format($item['total'], 0, ',', '.') }}</h3>

@@ -82,6 +82,7 @@ class EditBillingPasienPage extends Component
                 'id_tindakan'   => $item->tindakan_id,
                 'tarif_tindakan' => $item->tarif_tindakan ?? null,
                 'nilai_tarif'   => $item->nilai_tarif,
+                'nomer_gigi'    => $item->nomer_gigi ?? null,
             ];
         })->toArray();
 
@@ -138,6 +139,7 @@ class EditBillingPasienPage extends Component
             'id_tindakan' => $data['id_tindakan'],
             'tarif_tindakan' => $data['tarif_tindakan'],
             'nilai_tarif' => $data['nilai_tarif'],
+            'nomer_gigi' => $data['nomer_gigi'],
         ];
 
         $this->total_biaya -= $this->biayaTindakan;
@@ -315,6 +317,7 @@ class EditBillingPasienPage extends Component
             'lainnya' => 'array',
             'obatTerpilih' => 'array',
             'tindakanTerpilih.*.id_tindakan' => 'exists:tarif_tindakan,id',
+            'tindakanTerpilih.*.nomer_gigi' => 'nullable|string',
             'obatTerpilih.*.id_obat' => 'exists:obat_bhp,id',
         ];
     }
@@ -328,7 +331,7 @@ class EditBillingPasienPage extends Component
             'no_rm.required' => 'Nomer RM Wajib Di Isi.',
             'tindakanTerpilih.*.id_tindakan.required' => 'Tindakan tidak boleh kosong.',
             'tindakanTerpilih.*.id_tindakan.exists'   => 'Tindakan yang dipilih tidak valid.',
-
+            'tindakanTerpilih.*.nomer_gigi.string'   => 'Nomer gigi tidak valid.',
             'obatTerpilih.*.id_obat.required' => 'Obat tidak boleh kosong.',
             'obatTerpilih.*.id_obat.exists'   => 'Obat yang dipilih tidak valid.',
         ];
@@ -364,6 +367,7 @@ class EditBillingPasienPage extends Component
                     'tindakan_id'       => $model['id'],
                     'tarif_tindakan'  => $model->tarif_tindakan,
                     'nilai_tarif'     => $model->nilai_tarif,
+                    'nomer_gigi'      => $tindakan['nomer_gigi'] ?? null,
                     'created_at'   => now(),
                     'updated_at'   => now(),
                 ];

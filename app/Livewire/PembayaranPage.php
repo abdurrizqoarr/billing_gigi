@@ -34,6 +34,7 @@ class PembayaranPage extends Component
                 $hasil[$key] = [
                     'tarif_tindakan' => $item->tarif_tindakan,
                     'nilai_tarif'    => $item->nilai_tarif,
+                    'nomer_gigi'     => $item->nomer_gigi ?? null,
                     'jumlah'         => 0,
                     'total'          => 0,
                 ];

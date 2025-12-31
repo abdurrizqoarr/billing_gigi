@@ -13,20 +13,28 @@ class Tindakan extends Component
     public $tindakanTerpilih = [];
     public $total = 0;
 
+    public $inputGigi = [];
+
     protected $listeners = ['listenRefresh'];
 
     public function terapkanTindakan($id)
     {
         $tindakan = TarifTindakan::find($id);
-
         if (!$tindakan) return;
 
+        // Ambil nomor gigi dari array berdasarkan ID, jika kosong beri string kosong atau null
+        $nomor = $this->inputGigi[$id] ?? '-';
+
         $this->dispatch('addTindakan', [
-            'id' => (string) Str::uuid(),
+            'id' => (string) \Illuminate\Support\Str::uuid(),
             'id_tindakan' => $tindakan->id,
             'tarif_tindakan' => $tindakan->tarif_tindakan,
             'nilai_tarif' => $tindakan->nilai_tarif,
+            'nomer_gigi' => $nomor,
         ]);
+
+        // Opsional: Reset input setelah ditambahkan
+        $this->inputGigi[$id] = '';
     }
 
     public function batalTindakan($id)

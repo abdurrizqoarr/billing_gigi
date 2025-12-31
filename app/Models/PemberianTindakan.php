@@ -11,7 +11,7 @@ class PemberianTindakan extends Model
     use HasFactory, HasUuids;
 
     protected $table = 'pemberian_tindakan';
-    protected $fillable = ['pasien_id', 'tarif_tindakan', 'nilai_tarif', 'tindakan_id'];
+    protected $fillable = ['pasien_id', 'tarif_tindakan', 'nomer_gigi', 'nilai_tarif', 'tindakan_id'];
 
     public function pasien()
     {

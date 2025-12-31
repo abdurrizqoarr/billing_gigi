@@ -10,19 +10,29 @@
         </form>
 
         <!-- Daftar Tindakan -->
-        <div class="flex-1 overflow-y-auto space-y-2">
+        <div class="flex-1 overflow-y-auto space-y-3">
             @foreach ($tindakanList as $tindakan)
                 <div
-                    class="flex justify-between items-center p-3 bg-gray-50 
-                            rounded-xl hover:bg-sky-50 transition cursor-pointer">
-                    <div>
-                        <p class="font-medium text-gray-700">{{ $tindakan->tarif_tindakan }}</p>
-                        <p class="text-sm text-gray-500">Rp {{ number_format($tindakan->nilai_tarif, 0, ',', '.') }}</p>
+                    class="shadow bg-gray-50 p-3
+                            rounded-xl hover:bg-sky-50 transition cursor-pointer border border-gray-400 space-x-2">
+                    <div class="flex justify-between items-center ">
+                        <div>
+                            <p class="font-medium text-gray-700">{{ $tindakan->tarif_tindakan }}</p>
+                            <p class="text-sm text-gray-500">Rp {{ number_format($tindakan->nilai_tarif, 0, ',', '.') }}
+                            </p>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+
+                            <button wire:click="terapkanTindakan('{{ $tindakan->id }}')"
+                                class="px-3 py-1 bg-sky-500 text-white text-sm rounded-xl hover:bg-sky-600">
+                                Terapkan
+                            </button>
+                        </div>
                     </div>
-                    <button wire:click="terapkanTindakan('{{ $tindakan->id }}')"
-                        class="px-3 py-1 bg-sky-500 text-white text-sm rounded-xl hover:bg-sky-600">
-                        Terapkan
-                    </button>
+
+                    <input type="text" wire:model="inputGigi.{{ $tindakan->id }}" placeholder="No. Gigi"
+                        class="w-full px-2 py-1 text-sm border border-gray-300 rounded-lg focus:ring-sky-400 outline-none focus:border-sky-400">
                 </div>
             @endforeach
         </div>
@@ -37,9 +47,14 @@
                 <div
                     class="flex justify-between items-center p-3 bg-sky-50 
                             rounded-xl border border-sky-200">
-                    <div>
-                        <p class="font-medium text-gray-700">{{ $item['tarif_tindakan'] }}</p>
+                    <div class="space-y-2">
+                        <p class="font-medium text-gray-700">
+                            {{ $item['tarif_tindakan'] }}
+                        </p>
                         <p class="text-sm text-gray-500">Rp {{ number_format($item['nilai_tarif'], 0, ',', '.') }}</p>
+                        <div class="text-sky-700">
+                            Gigi: {{ $item['nomer_gigi'] ?? '-' }}
+                        </div>
                     </div>
                     <button wire:click="batalTindakan('{{ $item['id'] }}')"
                         class="px-3 py-1 bg-red-500 text-white text-sm rounded-xl hover:bg-red-600">
